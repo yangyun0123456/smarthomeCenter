@@ -1,0 +1,8 @@
+# Defines wich interfaces has to brought up automatically
+auto lo eth0
+
+# Configure loopback interface
+iface lo inet loopback
+
+# Configure eth0 interface
+iface eth0 inet dhcp

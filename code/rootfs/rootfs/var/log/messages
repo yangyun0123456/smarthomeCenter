@@ -1,0 +1,249 @@
+Jan  1 00:08:12 192 daemon.info linuxrc: starting pid 1242, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:13 192 daemon.info linuxrc: process '/sbin/getty 38400 tty1^M' (pid 1231) exited. Scheduling for restart.
+Jan  1 00:08:13 192 daemon.info linuxrc: process '/sbin/getty 38400 tty2^M' (pid 1232) exited. Scheduling for restart.
+Jan  1 00:08:13 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1242) exited. Scheduling for restart.
+Jan  1 00:08:13 192 daemon.info linuxrc: starting pid 1243, tty '/dev/tty1': '/sbin/getty 38400 tty1^M'
+Jan  1 00:08:13 192 daemon.info linuxrc: starting pid 1244, tty '/dev/tty2': '/sbin/getty 38400 tty2^M'
+Jan  1 00:08:13 192 daemon.info linuxrc: starting pid 1245, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:13 192 auth.err getty[1243]: can't open '/dev/tty1^M': No such file or directory^M
+Jan  1 00:08:13 192 auth.err getty[1244]: can't open '/dev/tty2^M': No such file or directory^M
+Jan  1 00:08:14 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1245) exited. Scheduling for restart.
+Jan  1 00:08:14 192 daemon.info linuxrc: starting pid 1246, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:15 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1246) exited. Scheduling for restart.
+Jan  1 00:08:15 192 daemon.info linuxrc: starting pid 1247, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:16 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1247) exited. Scheduling for restart.
+Jan  1 00:08:16 192 daemon.info linuxrc: starting pid 1248, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:17 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1248) exited. Scheduling for restart.
+Jan  1 00:08:17 192 daemon.info linuxrc: starting pid 1249, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:18 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1249) exited. Scheduling for restart.
+Jan  1 00:08:18 192 daemon.info linuxrc: starting pid 1250, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:19 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1250) exited. Scheduling for restart.
+Jan  1 00:08:19 192 daemon.info linuxrc: starting pid 1251, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:20 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1251) exited. Scheduling for restart.
+Jan  1 00:08:20 192 daemon.info linuxrc: starting pid 1252, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:21 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1252) exited. Scheduling for restart.
+Jan  1 00:08:21 192 daemon.info linuxrc: starting pid 1253, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:22 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1253) exited. Scheduling for restart.
+Jan  1 00:08:22 192 daemon.info linuxrc: starting pid 1254, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:23 192 daemon.info linuxrc: process '/sbin/getty 38400 tty1^M' (pid 1243) exited. Scheduling for restart.
+Jan  1 00:08:23 192 daemon.info linuxrc: process '/sbin/getty 38400 tty2^M' (pid 1244) exited. Scheduling for restart.
+Jan  1 00:08:23 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1254) exited. Scheduling for restart.
+Jan  1 00:08:23 192 daemon.info linuxrc: starting pid 1255, tty '/dev/tty1': '/sbin/getty 38400 tty1^M'
+Jan  1 00:08:23 192 daemon.info linuxrc: starting pid 1256, tty '/dev/tty2': '/sbin/getty 38400 tty2^M'
+Jan  1 00:08:23 192 daemon.info linuxrc: starting pid 1257, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:23 192 auth.err getty[1256]: can't open '/dev/tty2^M': No such file or directory^M
+Jan  1 00:08:23 192 auth.err getty[1255]: can't open '/dev/tty1^M': No such file or directory^M
+Jan  1 00:08:24 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1257) exited. Scheduling for restart.
+Jan  1 00:08:24 192 daemon.info linuxrc: starting pid 1258, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:25 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1258) exited. Scheduling for restart.
+Jan  1 00:08:25 192 daemon.info linuxrc: starting pid 1259, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:26 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1259) exited. Scheduling for restart.
+Jan  1 00:08:26 192 daemon.info linuxrc: starting pid 1260, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:27 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1260) exited. Scheduling for restart.
+Jan  1 00:08:27 192 daemon.info linuxrc: starting pid 1261, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:28 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1261) exited. Scheduling for restart.
+Jan  1 00:08:28 192 daemon.info linuxrc: starting pid 1262, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:29 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1262) exited. Scheduling for restart.
+Jan  1 00:08:29 192 daemon.info linuxrc: starting pid 1263, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:30 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1263) exited. Scheduling for restart.
+Jan  1 00:08:30 192 daemon.info linuxrc: starting pid 1264, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:31 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1264) exited. Scheduling for restart.
+Jan  1 00:08:31 192 daemon.info linuxrc: starting pid 1265, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:32 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1265) exited. Scheduling for restart.
+Jan  1 00:08:32 192 daemon.info linuxrc: starting pid 1266, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:33 192 daemon.info linuxrc: process '/sbin/getty 38400 tty1^M' (pid 1255) exited. Scheduling for restart.
+Jan  1 00:08:33 192 daemon.info linuxrc: process '/sbin/getty 38400 tty2^M' (pid 1256) exited. Scheduling for restart.
+Jan  1 00:08:33 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1266) exited. Scheduling for restart.
+Jan  1 00:08:33 192 daemon.info linuxrc: starting pid 1267, tty '/dev/tty1': '/sbin/getty 38400 tty1^M'
+Jan  1 00:08:33 192 daemon.info linuxrc: starting pid 1268, tty '/dev/tty2': '/sbin/getty 38400 tty2^M'
+Jan  1 00:08:33 192 daemon.info linuxrc: starting pid 1269, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:34 192 auth.err getty[1268]: can't open '/dev/tty2^M': No such file or directory^M
+Jan  1 00:08:34 192 auth.err getty[1267]: can't open '/dev/tty1^M': No such file or directory^M
+Jan  1 00:08:34 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1269) exited. Scheduling for restart.
+Jan  1 00:08:34 192 daemon.info linuxrc: starting pid 1270, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:35 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1270) exited. Scheduling for restart.
+Jan  1 00:08:35 192 daemon.info linuxrc: starting pid 1271, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:36 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1271) exited. Scheduling for restart.
+Jan  1 00:08:36 192 daemon.info linuxrc: starting pid 1272, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:38 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1272) exited. Scheduling for restart.
+Jan  1 00:08:38 192 daemon.info linuxrc: starting pid 1273, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:39 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1273) exited. Scheduling for restart.
+Jan  1 00:08:39 192 daemon.info linuxrc: starting pid 1274, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:40 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1274) exited. Scheduling for restart.
+Jan  1 00:08:40 192 daemon.info linuxrc: starting pid 1275, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:41 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1275) exited. Scheduling for restart.
+Jan  1 00:08:41 192 daemon.info linuxrc: starting pid 1276, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:42 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1276) exited. Scheduling for restart.
+Jan  1 00:08:42 192 daemon.info linuxrc: starting pid 1277, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:43 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1277) exited. Scheduling for restart.
+Jan  1 00:08:43 192 daemon.info linuxrc: starting pid 1278, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:44 192 daemon.info linuxrc: process '/sbin/getty 38400 tty1^M' (pid 1267) exited. Scheduling for restart.
+Jan  1 00:08:44 192 daemon.info linuxrc: process '/sbin/getty 38400 tty2^M' (pid 1268) exited. Scheduling for restart.
+Jan  1 00:08:44 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1278) exited. Scheduling for restart.
+Jan  1 00:08:44 192 daemon.info linuxrc: starting pid 1279, tty '/dev/tty1': '/sbin/getty 38400 tty1^M'
+Jan  1 00:08:44 192 daemon.info linuxrc: starting pid 1280, tty '/dev/tty2': '/sbin/getty 38400 tty2^M'
+Jan  1 00:08:44 192 daemon.info linuxrc: starting pid 1281, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:44 192 auth.err getty[1279]: can't open '/dev/tty1^M': No such file or directory^M
+Jan  1 00:08:44 192 auth.err getty[1280]: can't open '/dev/tty2^M': No such file or directory^M
+Jan  1 00:08:45 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1281) exited. Scheduling for restart.
+Jan  1 00:08:45 192 daemon.info linuxrc: starting pid 1282, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:46 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1282) exited. Scheduling for restart.
+Jan  1 00:08:46 192 daemon.info linuxrc: starting pid 1283, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:47 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1283) exited. Scheduling for restart.
+Jan  1 00:08:47 192 daemon.info linuxrc: starting pid 1284, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:48 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1284) exited. Scheduling for restart.
+Jan  1 00:08:48 192 daemon.info linuxrc: starting pid 1285, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:49 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1285) exited. Scheduling for restart.
+Jan  1 00:08:49 192 daemon.info linuxrc: starting pid 1286, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:50 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1286) exited. Scheduling for restart.
+Jan  1 00:08:50 192 daemon.info linuxrc: starting pid 1287, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:51 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1287) exited. Scheduling for restart.
+Jan  1 00:08:51 192 daemon.info linuxrc: starting pid 1288, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:52 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1288) exited. Scheduling for restart.
+Jan  1 00:08:52 192 daemon.info linuxrc: starting pid 1289, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:53 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1289) exited. Scheduling for restart.
+Jan  1 00:08:53 192 daemon.info linuxrc: starting pid 1290, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:54 192 daemon.info linuxrc: process '/sbin/getty 38400 tty1^M' (pid 1279) exited. Scheduling for restart.
+Jan  1 00:08:54 192 daemon.info linuxrc: process '/sbin/getty 38400 tty2^M' (pid 1280) exited. Scheduling for restart.
+Jan  1 00:08:54 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1290) exited. Scheduling for restart.
+Jan  1 00:08:54 192 daemon.info linuxrc: starting pid 1291, tty '/dev/tty1': '/sbin/getty 38400 tty1^M'
+Jan  1 00:08:54 192 daemon.info linuxrc: starting pid 1292, tty '/dev/tty2': '/sbin/getty 38400 tty2^M'
+Jan  1 00:08:54 192 daemon.info linuxrc: starting pid 1293, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:54 192 auth.err getty[1291]: can't open '/dev/tty1^M': No such file or directory^M
+Jan  1 00:08:54 192 auth.err getty[1292]: can't open '/dev/tty2^M': No such file or directory^M
+Jan  1 00:08:55 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1293) exited. Scheduling for restart.
+Jan  1 00:08:55 192 daemon.info linuxrc: starting pid 1294, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:56 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1294) exited. Scheduling for restart.
+Jan  1 00:08:56 192 daemon.info linuxrc: starting pid 1295, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:57 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1295) exited. Scheduling for restart.
+Jan  1 00:08:57 192 daemon.info linuxrc: starting pid 1296, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:58 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1296) exited. Scheduling for restart.
+Jan  1 00:08:58 192 daemon.info linuxrc: starting pid 1297, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:08:59 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1297) exited. Scheduling for restart.
+Jan  1 00:08:59 192 daemon.info linuxrc: starting pid 1298, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:00 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1298) exited. Scheduling for restart.
+Jan  1 00:09:00 192 daemon.info linuxrc: starting pid 1299, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:01 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1299) exited. Scheduling for restart.
+Jan  1 00:09:01 192 daemon.info linuxrc: starting pid 1300, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:02 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1300) exited. Scheduling for restart.
+Jan  1 00:09:02 192 daemon.info linuxrc: starting pid 1301, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:03 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1301) exited. Scheduling for restart.
+Jan  1 00:09:03 192 daemon.info linuxrc: starting pid 1302, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:04 192 daemon.info linuxrc: process '/sbin/getty 38400 tty1^M' (pid 1291) exited. Scheduling for restart.
+Jan  1 00:09:04 192 daemon.info linuxrc: process '/sbin/getty 38400 tty2^M' (pid 1292) exited. Scheduling for restart.
+Jan  1 00:09:04 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1302) exited. Scheduling for restart.
+Jan  1 00:09:04 192 daemon.info linuxrc: starting pid 1303, tty '/dev/tty1': '/sbin/getty 38400 tty1^M'
+Jan  1 00:09:04 192 daemon.info linuxrc: starting pid 1304, tty '/dev/tty2': '/sbin/getty 38400 tty2^M'
+Jan  1 00:09:04 192 daemon.info linuxrc: starting pid 1305, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:04 192 auth.err getty[1303]: can't open '/dev/tty1^M': No such file or directory^M
+Jan  1 00:09:04 192 auth.err getty[1304]: can't open '/dev/tty2^M': No such file or directory^M
+Jan  1 00:09:05 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1305) exited. Scheduling for restart.
+Jan  1 00:09:05 192 daemon.info linuxrc: starting pid 1306, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:06 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1306) exited. Scheduling for restart.
+Jan  1 00:09:06 192 daemon.info linuxrc: starting pid 1307, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:07 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1307) exited. Scheduling for restart.
+Jan  1 00:09:07 192 daemon.info linuxrc: starting pid 1308, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:08 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1308) exited. Scheduling for restart.
+Jan  1 00:09:08 192 daemon.info linuxrc: starting pid 1309, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:09 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1309) exited. Scheduling for restart.
+Jan  1 00:09:09 192 daemon.info linuxrc: starting pid 1310, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:10 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1310) exited. Scheduling for restart.
+Jan  1 00:09:10 192 daemon.info linuxrc: starting pid 1311, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:11 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1311) exited. Scheduling for restart.
+Jan  1 00:09:11 192 daemon.info linuxrc: starting pid 1312, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:12 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1312) exited. Scheduling for restart.
+Jan  1 00:09:12 192 daemon.info linuxrc: starting pid 1313, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:13 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1313) exited. Scheduling for restart.
+Jan  1 00:09:13 192 daemon.info linuxrc: starting pid 1314, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:14 192 daemon.info linuxrc: process '/sbin/getty 38400 tty1^M' (pid 1303) exited. Scheduling for restart.
+Jan  1 00:09:14 192 daemon.info linuxrc: process '/sbin/getty 38400 tty2^M' (pid 1304) exited. Scheduling for restart.
+Jan  1 00:09:14 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1314) exited. Scheduling for restart.
+Jan  1 00:09:14 192 daemon.info linuxrc: starting pid 1315, tty '/dev/tty1': '/sbin/getty 38400 tty1^M'
+Jan  1 00:09:14 192 daemon.info linuxrc: starting pid 1316, tty '/dev/tty2': '/sbin/getty 38400 tty2^M'
+Jan  1 00:09:14 192 daemon.info linuxrc: starting pid 1317, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:14 192 auth.err getty[1315]: can't open '/dev/tty1^M': No such file or directory^M
+Jan  1 00:09:14 192 auth.err getty[1316]: can't open '/dev/tty2^M': No such file or directory^M
+Jan  1 00:09:15 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1317) exited. Scheduling for restart.
+Jan  1 00:09:15 192 daemon.info linuxrc: starting pid 1318, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:16 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1318) exited. Scheduling for restart.
+Jan  1 00:09:16 192 daemon.info linuxrc: starting pid 1319, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:17 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1319) exited. Scheduling for restart.
+Jan  1 00:09:17 192 daemon.info linuxrc: starting pid 1320, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:18 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1320) exited. Scheduling for restart.
+Jan  1 00:09:18 192 daemon.info linuxrc: starting pid 1321, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:19 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1321) exited. Scheduling for restart.
+Jan  1 00:09:19 192 daemon.info linuxrc: starting pid 1322, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:20 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1322) exited. Scheduling for restart.
+Jan  1 00:09:20 192 daemon.info linuxrc: starting pid 1323, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:21 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1323) exited. Scheduling for restart.
+Jan  1 00:09:21 192 daemon.info linuxrc: starting pid 1324, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:22 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1324) exited. Scheduling for restart.
+Jan  1 00:09:22 192 daemon.info linuxrc: starting pid 1325, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:23 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1325) exited. Scheduling for restart.
+Jan  1 00:09:23 192 daemon.info linuxrc: starting pid 1326, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:24 192 daemon.info linuxrc: process '/sbin/getty 38400 tty1^M' (pid 1315) exited. Scheduling for restart.
+Jan  1 00:09:24 192 daemon.info linuxrc: process '/sbin/getty 38400 tty2^M' (pid 1316) exited. Scheduling for restart.
+Jan  1 00:09:24 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1326) exited. Scheduling for restart.
+Jan  1 00:09:24 192 daemon.info linuxrc: starting pid 1327, tty '/dev/tty1': '/sbin/getty 38400 tty1^M'
+Jan  1 00:09:24 192 daemon.info linuxrc: starting pid 1328, tty '/dev/tty2': '/sbin/getty 38400 tty2^M'
+Jan  1 00:09:24 192 daemon.info linuxrc: starting pid 1329, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:24 192 auth.err getty[1328]: can't open '/dev/tty2^M': No such file or directory^M
+Jan  1 00:09:24 192 auth.err getty[1327]: can't open '/dev/tty1^M': No such file or directory^M
+Jan  1 00:09:25 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1329) exited. Scheduling for restart.
+Jan  1 00:09:25 192 daemon.info linuxrc: starting pid 1330, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:26 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1330) exited. Scheduling for restart.
+Jan  1 00:09:26 192 daemon.info linuxrc: starting pid 1331, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:27 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1331) exited. Scheduling for restart.
+Jan  1 00:09:27 192 daemon.info linuxrc: starting pid 1332, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:28 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1332) exited. Scheduling for restart.
+Jan  1 00:09:28 192 daemon.info linuxrc: starting pid 1333, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:29 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1333) exited. Scheduling for restart.
+Jan  1 00:09:29 192 daemon.info linuxrc: starting pid 1334, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:30 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1334) exited. Scheduling for restart.
+Jan  1 00:09:30 192 daemon.info linuxrc: starting pid 1335, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:31 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1335) exited. Scheduling for restart.
+Jan  1 00:09:31 192 daemon.info linuxrc: starting pid 1336, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:32 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1336) exited. Scheduling for restart.
+Jan  1 00:09:32 192 daemon.info linuxrc: starting pid 1337, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:33 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1337) exited. Scheduling for restart.
+Jan  1 00:09:33 192 daemon.info linuxrc: starting pid 1338, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:34 192 daemon.info linuxrc: process '/sbin/getty 38400 tty1^M' (pid 1327) exited. Scheduling for restart.
+Jan  1 00:09:34 192 daemon.info linuxrc: process '/sbin/getty 38400 tty2^M' (pid 1328) exited. Scheduling for restart.
+Jan  1 00:09:34 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1338) exited. Scheduling for restart.
+Jan  1 00:09:34 192 daemon.info linuxrc: starting pid 1339, tty '/dev/tty1': '/sbin/getty 38400 tty1^M'
+Jan  1 00:09:34 192 daemon.info linuxrc: starting pid 1340, tty '/dev/tty2': '/sbin/getty 38400 tty2^M'
+Jan  1 00:09:34 192 daemon.info linuxrc: starting pid 1341, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:34 192 auth.err getty[1340]: can't open '/dev/tty2^M': No such file or directory^M
+Jan  1 00:09:34 192 auth.err getty[1339]: can't open '/dev/tty1^M': No such file or directory^M
+Jan  1 00:09:35 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1341) exited. Scheduling for restart.
+Jan  1 00:09:35 192 daemon.info linuxrc: starting pid 1342, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:36 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1342) exited. Scheduling for restart.
+Jan  1 00:09:36 192 daemon.info linuxrc: starting pid 1343, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:37 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1343) exited. Scheduling for restart.
+Jan  1 00:09:37 192 daemon.info linuxrc: starting pid 1344, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:38 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1344) exited. Scheduling for restart.
+Jan  1 00:09:38 192 daemon.info linuxrc: starting pid 1345, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:39 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1345) exited. Scheduling for restart.
+Jan  1 00:09:39 192 daemon.info linuxrc: starting pid 1346, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:40 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1346) exited. Scheduling for restart.
+Jan  1 00:09:40 192 daemon.info linuxrc: starting pid 1347, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:41 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1347) exited. Scheduling for restart.
+Jan  1 00:09:41 192 daemon.info linuxrc: starting pid 1348, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:42 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1348) exited. Scheduling for restart.
+Jan  1 00:09:42 192 daemon.info linuxrc: starting pid 1349, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:43 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1349) exited. Scheduling for restart.
+Jan  1 00:09:43 192 daemon.info linuxrc: starting pid 1350, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:44 192 daemon.info linuxrc: process '/sbin/getty 38400 tty1^M' (pid 1339) exited. Scheduling for restart.
+Jan  1 00:09:44 192 daemon.info linuxrc: process '/sbin/getty 38400 tty2^M' (pid 1340) exited. Scheduling for restart.
+Jan  1 00:09:44 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1350) exited. Scheduling for restart.
+Jan  1 00:09:44 192 daemon.info linuxrc: starting pid 1351, tty '/dev/tty1': '/sbin/getty 38400 tty1^M'
+Jan  1 00:09:44 192 daemon.info linuxrc: starting pid 1352, tty '/dev/tty2': '/sbin/getty 38400 tty2^M'
+Jan  1 00:09:44 192 daemon.info linuxrc: starting pid 1353, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:44 192 auth.err getty[1352]: can't open '/dev/tty2^M': No such file or directory^M
+Jan  1 00:09:44 192 auth.err getty[1351]: can't open '/dev/tty1^M': No such file or directory^M
+Jan  1 00:09:45 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1353) exited. Scheduling for restart.
+Jan  1 00:09:45 192 daemon.info linuxrc: starting pid 1354, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:46 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1354) exited. Scheduling for restart.
+Jan  1 00:09:46 192 daemon.info linuxrc: starting pid 1355, tty '/dev/null': '/sbin/klogd -n^M'
+Jan  1 00:09:47 192 daemon.info linuxrc: process '/sbin/klogd -n^M' (pid 1355) exited. Scheduling for restart.
+Jan  1 00:09:47 192 daemon.info linuxrc: starting pid 1356, tty '/dev/null': '/sbin/klogd -n^M'
