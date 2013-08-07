@@ -1,0 +1,80 @@
+MPlayer版本：
+madplay-0.15.2b.tar.gz
+交叉编译器版本：
+arm-linux-gcc 4.1.2
+操作系统平台：
+Linux -- ubuntu11.04
+所需源码：
+       madplay-0.15.2b.tar.gz
+        libid3tag-0.15.1b.tar.gz 
+        zlib-1.2.5.tar.gz
+        libmad-0.15.1b.tar.gz
+一 ：安装交叉编译工具（略）
+
+
+二 ：编译zlib-1.2.5.tar.gz 
+
+
+#tar xzvf zlib-1.2.5.tar.gz
+#cd zlib-1.2.5
+# ./configure --prefix=/home/pro/madplayer
+修改Makefile
+CC=arm-linux-gcc
+AR=arm-linux-ar rc
+RANLIB=arm-linux-ranlib
+CPP=arm-linux-gcc -E
+LDSHARED=arm-linux-gcc shared -Wl.........
+#make
+#make install
+
+
+三 ：编译libid3tag-0.15.1b.tar.gz
+
+
+#tar xzvf libid3tag-0.15.1b.tar.gz
+#cd libid3tag-0.15.1b/
+#./configure CC=arm-linux-gcc --host=arm-linux --disable-shared --enable-static --prefix=/home/pro/madplayer 
+//CPPFLAGS=-I/home/pro/madplayer/include LDFLAGS=-L/home/pro/madplayer/lib
+#make
+#make install
+
+
+四 ：编译libmad-0.15.1b.tar.gz
+
+
+#tar xzvf libmad-0.15.1b.tar.gz
+#cd libmad-0.15.1b/
+#./configure CC=arm-linux-gcc --host=arm-linux --disable-shared --enable-static --prefix=/home/pro/madplayer 
+//CPPFLAGS=-I/home/pro/madplayer/include LDFLAGS=-L/home/pro/madplayer/lib
+#make
+出现错误：
+cc1: error: unrecognized command line option "-fforce-mem"
+make[2]: *** [version.lo] 错误 1
+解决方法：
+修改Makefile,将"-fforce-mem"选项去掉
+#make
+#make install
+
+
+五 ：编译madplay-0.15.2b.tar.gz
+
+
+#tar xzvf madplay-0.15.2b.tar.gz
+#cd madplay-0.15.2b/
+# ./configure CC=arm-linux-gcc --host=arm-linux --disable-shared --enable-static --prefix=/home/pro/madplayer 
+//CPPFLAGS=-I/home/pro/madplayer/include LDFLAGS=-L/home/pro/madplayer/lib
+#make
+当前目录生成可执行文件madplay
+        执行：
+#arm-linux-readelf -d madplay
+可以知道需要的动态库
+Dynamic section at offset 0x2617c contains 26 entries:
+  Tag        Type                         Name/Value
+ 0x00000001 (NEEDED)                     Shared library: [libid3tag.so.0]
+ 0x00000001 (NEEDED)                     Shared library: [libm.so.6]
+ 0x00000001 (NEEDED)                     Shared library: [libc.so.6]
+ 0x0000000c (INIT)                       0x93b0
+
+上面的都完成了之后，想把它搞成静态的，免得去链接那些动态库，很麻烦，做法如下：
+解决静态编译，在编译完成后我的选项加 -static
+arm-linux-gcc -Wall -g -O2 -o madplay madplay.o getopt.o getopt1.o version.o resample.o filter.o tag.o crc.o rgain.o player.o audio.o audio_aiff.o audio_cdda.o audio_hex.o audio_null.o audio_raw.o audio_snd.o audio_wave.o audio_oss.o  -L/home/pro/madplayer/lib /home/pro/madplayer/lib/libmad.a -lid3tag -lm -static
