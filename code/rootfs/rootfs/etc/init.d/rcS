@@ -1,0 +1,52 @@
+#!/bin/sh
+echo "Processing /etc/init.d/rcS..."
+# Set environment
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
+runlevel=S
+prevlevel=N
+umask 022
+export PATH runlevel prevlevel
+# mdev
+trap ":" INT QUIT TSTP
+/bin/hostname FriendlyARM
+
+/bin/mount -n -t proc none /proc
+/bin/mount -n -t sysfs none /sys
+/bin/mount -n -t usbfs none /proc/bus/usb
+/bin/mount -t ramfs none /dev
+
+echo /sbin/mdev > /proc/sys/kernel/hotplug
+/sbin/mdev -s
+/bin/hotplug
+
+# mounting file system specified in /etc/fstab
+mkdir -p /dev/pts
+mkdir -p /dev/shm
+/bin/mount -n -t devpts none /dev/pts -o mode=0622
+/bin/mount -n -t tmpfs tmpfs /dev/shm
+/bin/mount -n -t ramfs none /tmp
+/bin/mount -n -t ramfs none /var
+mkdir -p /var/empty
+mkdir -p /var/log
+mkdir -p /var/lock
+mkdir -p /var/run
+mkdir -p /var/tmp
+
+/sbin/hwclock -s
+
+# mknod input
+if [ ! -d /dev/input ]; then
+	/bin/mkdir -p /dev/input
+	/bin/mknod /dev/input/event0 c 13 64
+fi
+
+/sbin/ifconfig lo 127.0.0.1
+/etc/init.d/ifconfig-eth0
+
+# run rc.local
+/etc/init.d/rc.local
+#exit
+echo "Ready"
+echo
+exit 0

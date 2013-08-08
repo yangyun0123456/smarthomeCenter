@@ -1,0 +1,4 @@
+#!/bin/sh
+# insert kernel modules
+# modprobe xxx
+
