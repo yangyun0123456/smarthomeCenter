@@ -2,3 +2,5 @@
 # insert kernel modules
 # modprobe xxx
 
+mknod /dev/random c 1 8
+mknod /dev/urandom c 1 9
