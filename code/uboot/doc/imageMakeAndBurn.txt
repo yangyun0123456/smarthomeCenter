@@ -1,0 +1,12 @@
+nfs 0x30008000 192.168.3.3:/home/smarthomeCenter/code/rootfs/uImage.img
+nand erase 0x80000 0x500000
+nand write 0x30008000 0x80000 0x500000
+mkyaffs2image rootfs_qtopia_qt4/ rootfs_qt.yaffs
+nfs 0x30008000 192.168.3.3:/home/smarthomeCenter/code/rootfs/rootfs_qt.img
+nand scrub 0x580000(格式化flash去掉坏块标志,0x4000000) 0x4000000-0x580000=0x3a80000
+nand erase 0x580000 0x3a80000
+nand write.yaffs 0x300080000 0x00580000 0xb19bd0
+setenv bootcmd "nfs 0x30008000 192.168.3.3:/home/smarthomeCenter/code/rootfs/uImage.img;bootm 0x30008040"
+setenv bootcmd "nand read 0x30008000 0x80000 0x300000;bootm 0x30008040"
+setenv bootargs "noinitrd root=/dev/mtdblock3 rw rootfstype=yaffs console=ttySAC0,115200 init=/linuxrc mem=64M"
+setenv bootargs "noinitrd root=/dev/nfs rw nfsroot=192.168.3.3:/home/smarthomeCenter/code/rootfs/rootfs_qtopia_qt4 nfsaddrs=192.168.3.4:192.168.3.3:192.168.3.1:255.255.255.0 console=ttySAC0,115200 init=/linuxrc mem=64M"
