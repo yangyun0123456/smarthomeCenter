@@ -140,6 +140,97 @@ int OpenDev(char *Dev)
 		return fd;
 }
 
+//commands list
+
+#define COMMANDLEN   14
+static char toCommand[COMMANDLEN];
+static int haveToCommand = 0;
+
+static char fromCommand[COMMANDLEN];
+static int haveFromCommand = 0;
+
+int handle_command(char* cmd, int len)
+{
+        
+}
+
+#define COMMANDIDLOGOK			0
+#define COMMANDLOGERR			1
+#define COMMANDREADITEMNUM		2
+#define COMMANDRETURNITEMNUM	3
+#define COMMANDREADITEMBYINDEX	4
+#define COMMANDRETURNITEM		5
+#define COMMANDDELETEALLITEM	6
+#define COMMANDINSERTITEM		7
+#define COMMANDUNLOCK			8
+#define COMMANDRETURNOK			9
+
+
+passwordL = passwordL*10 + code;
+//passwordH save password hight 9 num.
+if(passwordL>999999999)
+{
+    passwordH = passwordL;
+    passwordL = 1;
+}
+
+int send_command(int comId, void* param0, void* param1, void* param2, void* param3)
+{
+    memset(&toCommand, 0, COMMANDLEN);
+    haveToCommand = 0;
+    
+    switch(comId)
+    {
+        case COMMANDREADITEMNUM:
+        {
+            toCommand[0] = COMMANDREADITEMNUM;
+            haveToCommand = 1;
+            break;
+        }
+        case COMMANDREADITEMBYINDEX;
+        {
+            toCommand[0] = COMMANDREADITEMBYINDEX;
+            toCommand[1] = (unsigned char)(param0&0xff);
+            haveToCommand = 1;
+            break;
+        }
+        case COMMANDDELETEALLITEM;
+        {
+            toCommand[0] = COMMANDDELETEALLITEM;
+            toCommand[1] = (unsigned char)(param0&0xff);
+            haveToCommand = 1;
+            break;
+        }
+        case COMMANDINSERTITEM;
+        {
+            toCommand[0] = COMMANDINSERTITEM;
+            toCommand[1] = (unsigned char)(param0&0xff);
+            //id card
+            toCommand[2] = (unsigned int)(param1)
+            xxxxxx
+                xxxxxx
+                xxxxx
+            haveToCommand = 1;
+            break;
+        }
+        case COMMANDUNLOCK;
+        {
+            toCommand[0] = COMMANDUNLOCK;
+            toCommand[1] = (unsigned char)(param0&0xff);
+            xxxxxx
+                xxxxxx
+                xxxxx
+            haveToCommand = 1;
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+//commands list end.
+
+
 int main(int argc, char **argv)
 {
 	int fd;
@@ -160,12 +251,10 @@ int main(int argc, char **argv)
 	}
 	printf("Please post card...\n");
 	while (1) //循环读取数据
-	{   
+	{
+	    
 		while((nread = read(fd, buff, 14))>0)
 		{ 
-			printf("\nLen %d\n",nread); 
-			buff[nread+1] = '\0';   
-			printf( "\n%s", buff);   
 		}
 	}
 	close(fd);  
