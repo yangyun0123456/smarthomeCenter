@@ -1,12 +1,12 @@
 #!/bin/sh
 echo "Processing /etc/init.d/rcS..."
 # Set environment
-PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
 runlevel=S
 prevlevel=N
 umask 022
-export PATH runlevel prevlevel
+export PATH LD_LIBRARY_PATH runlevel prevlevel
 # mdev
 trap ":" INT QUIT TSTP
 /bin/hostname FriendlyARM
@@ -42,7 +42,9 @@ if [ ! -d /dev/input ]; then
 fi
 
 /sbin/ifconfig lo 127.0.0.1
-/etc/init.d/ifconfig-eth0
+#/etc/init.d/ifconfig-eth0
+
+mkdir /home/a -p
 
 # run rc.local
 /etc/init.d/rc.local
