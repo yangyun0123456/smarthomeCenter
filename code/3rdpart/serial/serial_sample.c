@@ -170,12 +170,29 @@ static int handle_command(char* cmd, int len)
 {
     unsigned char comId = cmd[0];
     unsigned char type = cmd[1];
-    unsigned int id = Read32(cmd[2], cmd[3], cmd[4], cmd[5]);
-    unsigned int passwordH = Read32(cmd[6], cmd[7], cmd[8], cmd[9]);
-    unsigned int passwordL = Read32(cmd[10], cmd[11], cmd[12], cmd[13]);
-    
-    passwordH %= 10;
-    passwordL %= 10;
+    unsigned int id = Read32(cmd[5], cmd[4], cmd[3], cmd[2]);
+    unsigned int passwordH = Read32(cmd[9], cmd[8], cmd[7], cmd[6]);
+    unsigned int passwordL = Read32(cmd[13], cmd[12], cmd[11], cmd[10]);
+
+	char passwordCharH[20];
+	char passwordCharL[20];
+	char passwordChar[32];
+	int passwordCharCount = 0;
+
+	memset(passwordCharH, 0, 20);
+	memset(passwordCharL, 0, 20);
+	memset(passwordChar, 0, 32);
+	
+	sprintf(passwordCharH, "%d", passwordH);
+	sprintf(passwordCharL, "%d", passwordL);
+
+	if(strlen(passwordCharH)>2)
+	{
+		memcpy(passwordChar, passwordCharH+1, strlen(passwordCharH)-1);
+		passwordCharCount += (strlen(passwordCharH)-1);
+	}
+	if(strlen(passwordCharL)>2)
+		memcpy(passwordChar+passwordCharCount, passwordCharL+1, strlen(passwordCharL)-1);
 
     switch(comId)
     {
@@ -183,22 +200,18 @@ static int handle_command(char* cmd, int len)
         {
             if(type==PASSWORDFLAGS_ID)
             {
-                printf("Use ID Card: %d\n", id);                
+                printf("Use ID Card: %d\n", (unsigned int)(id));                
             }
             else if(type==PASSWORDFLAGS_PASSWORD)
             {
                 printf("Use password: ");
-                if(passwordH) printf("%d", passwordH);
-                if(passwordL) printf("%d", passwordL);
-                printf("\n");
+                if(passwordChar) printf("%s\n", passwordChar);
             }
             else if(type==(PASSWORDFLAGS_ID|PASSWORDFLAGS_PASSWORD))
             {
                 printf("Use ID Card: %d\t", id);                
                 printf("And use password: ");
-                if(passwordH) printf("%d", passwordH);
-                if(passwordL) printf("%d", passwordL);
-                printf("\n");
+                if(passwordChar) printf("%s\n", passwordChar);
             }
             break;
         }
@@ -206,14 +219,12 @@ static int handle_command(char* cmd, int len)
         {
             printf("Error input:\n\tID Card: %d\n", id);
             printf("\tPassword: ");
-            if(passwordH) printf("%d", passwordH);
-            if(passwordL) printf("%d", passwordL);
-            printf("\n");
+			if(passwordChar) printf("%s\n", passwordChar);
             break;
         }
-        case COMMANDRETURNITEMNUM:
+        case COMMANDRETURNITEM:
         {
-            printf("Return Item: %d\n", type);
+            printf("Return Item type: %d\n", type);
             if(type==PASSWORDFLAGS_ID)
             {
                 printf("Return ID Card: %d\n", id);                
@@ -221,21 +232,17 @@ static int handle_command(char* cmd, int len)
             else if(type==PASSWORDFLAGS_PASSWORD)
             {
                 printf("Return password: ");
-                if(passwordH) printf("%d", passwordH);
-                if(passwordL) printf("%d", passwordL);
-                printf("\n");
+                if(passwordChar) printf("%s\n", passwordChar);
             }
             else if(type==(PASSWORDFLAGS_ID|PASSWORDFLAGS_PASSWORD))
             {
                 printf("Return ID Card: %d\t", id);                
                 printf("And Return password: ");
-                if(passwordH) printf("%d", passwordH);
-                if(passwordL) printf("%d", passwordL);
-                printf("\n");
+                if(passwordChar) printf("%s\n", passwordChar);
             }
             break;
         }
-        case COMMANDRETURNITEM:
+        case COMMANDRETURNITEMNUM:
         {
             printf("Return Item Number: %d\n", type);
             break;
@@ -331,113 +338,139 @@ static int send_command(int comId, unsigned char type, unsigned int id, unsigned
 
 //commands list end.
 static int sPortFd = 0;
-static pthread_t readWriteThreadId = 0;
-
 static pthread_t ttyInputThreadId = 0;
 
-static int threadRun = 0;
-static int threadRunning = 0;
-
-static void readWriteThread(void* param)
+static int findFirstChar(char* buf, int bufLen, char ch)
 {
-	int nread = 0;
-	char buff[512];
+	int i = 0;
 
-    threadRun = threadRunning = 1;
-    while(threadRun)
-    {
-       //read command.
-       nread += read(sPortFd, buff+nread, (COMMANDLEN-nread));
-       if(nread == COMMANDLEN)
-       {
-            handle_command(buff, COMMANDLEN);
-            nread = 0;
-       }
-       //write command.
-       if(haveToCommand)
-       {
-            write(sPortFd, toCommand, COMMANDLEN);
-            haveToCommand = 0;
-       }
-       usleep(100*1000);
-    }
-    threadRun = threadRunning = 0;
-}
-
-static void closeThread(void)
-{
-    threadRun = 0;
-    while(threadRunning)
-    {
-        printf("Waiting for thread over...\n");
-        usleep(400*1000);
-    }
-    threadRun = threadRunning = 0;
+	for(i=0;i<bufLen;i++)
+		if(buf[i] == ch) return i;
+	return -1;
 }
 
 static void handle_input(char* buf, int bufLen)
 {
-    char tmp[512];
+	char comString[64];
+	char typeString[64];
+	char idString[64];
+	char passwordString[64];
+	char tmp[64];
+	
     char* s = NULL;
     char* e = NULL;
+	
+	unsigned char type = 0;
+	unsigned int id = 0;
+	unsigned int passwordH = 0;
+	unsigned int passwordL = 0;
 
-    memset(tmp, 0, 512);
+	int n = 0;
+
+	memset(comString, 0, 64);
+	memset(typeString, 0, 64);
+	memset(idString, 0, 64);
+	memset(passwordString, 0, 64);
+
     s = strchr(buf, ' ');
-    if(s)
+	if(s)
+	{
+		memcpy(comString, buf, s-buf);
+		s+=1;
+		e = strchr(s, ' ');
+		if(e)
+		{
+			memcpy(typeString, s, e-s);
+			e+=1;
+			s = strchr(e, ' ');
+			if(s)
+			{
+				memcpy(idString, e, s-e);
+				s+=1;
+				e = strchr(s, ' ');
+				if(e)
+				{
+					memcpy(passwordString, s, e-s);
+				}
+				else
+					memcpy(passwordString, s, bufLen-(s-buf));
+			}
+			else
+				memcpy(idString, e, bufLen-(e-buf));
+		}
+		else
+			memcpy(typeString, s, bufLen-(s-buf));
+	}
+	else
+		memcpy(comString, buf, bufLen);
+
+	//printf("comString:%s, typeString:%s, idString:%s, passwordString:%s\n", comString, typeString, idString, passwordString);
+
+	if(strlen(typeString)) type = atoi(typeString);
+	if(strlen(idString)) id = atoi(idString);
+	if(strlen(passwordString))
+	{
+		if(strlen(passwordString)>9)
+		{
+			memset(tmp, 0, 64);
+			tmp[0] = '1';
+			memcpy(tmp+1, passwordString, 9);
+			passwordH = atoi(tmp);
+			memset(tmp, 0, 64);
+			tmp[0] = '1';
+			memcpy(tmp+1, passwordString+9, strlen(passwordString)-9);
+			passwordL = atoi(tmp);
+		}
+		else
+		{
+			memset(tmp, 0, 64);
+			tmp[0] = '1';
+			memcpy(tmp+1, passwordString, strlen(passwordString));
+			passwordH = 1;
+			passwordL = atoi(tmp);
+		}
+	}
+
+	//printf("in int typeString:%d, idString:%d, passwordH:%d, passwordL:%d\n", type, id, passwordH, passwordL);
+
+    if(!strcmp(comString, "number"))
     {
-        memcpy(tmp, buf, s-buf);
-
-        if(!strcmp(tmp, "number"))
-        {
-            send_command(COMMANDREADITEMNUM, 0, 0, 0, 0);
-        }
-        else if(!strcmp(tmp, "item"))
-        {
-            e = strchr(s, ' ');
-            if(e)
-            {
-                int index = 0;
-
-                memset(tmp, 0, 512);
-                memcpy(tmp, s, e-s);
-                index = atoi(tmp);
-                if(index<100)
-                {
-                    send_command(COMMANDREADITEMBYINDEX, index, 0, 0, 0);
-                }
-            }
-        }
-        else if(!strcmp(tmp, "deleteall"))
-        {
-            e = strchr(s, ' ');
-            if(e)
-            {
-                int num = 0;
-
-                memset(tmp, 0, 512);
-                memcpy(tmp, s, e-s);
-                num = atoi(tmp);
-                if(num<100)
-                {
-                    send_command(COMMANDDELETEALLITEM, num, 0, 0, 0);
-                }
-            }
-        }
-        else if(!strcmp(tmp, "insert"))
-        {
-
-        }
-        else if(!strcmp(tmp, "unlock"))
-        {
-
-        }
-        memset(tmp, 0, 512);
+        send_command(COMMANDREADITEMNUM, 0, 0, 0, 0);
     }
-     
+    else if(!strcmp(comString, "item"))
+    {
+        if(type<100)
+        {
+            send_command(COMMANDREADITEMBYINDEX, type, 0, 0, 0);
+        }
+    }
+    else if(!strcmp(comString, "deleteall"))
+    {
+        if(type<100)
+        {
+            send_command(COMMANDDELETEALLITEM, type, 0, 0, 0);
+        }
+    }
+    else if(!strcmp(tmp, "insert"))
+    {
+        if(type<5)
+        {
+            send_command(COMMANDINSERTITEM, type, id, passwordH, passwordL);
+        }
+    }
+    else if(!strcmp(tmp, "unlock"))
+    {
+        if(type<5)
+        {
+            send_command(COMMANDUNLOCK, type, id, passwordH, passwordL);
+        }
+    }
 }
 
 static int ttyInputRun = 0;
 static int ttyInputRunning = 0;
+static int mainThreadRun = 0;
+static void closeThread(void);
 
 static void ttyInput(void* param)
 {
@@ -453,8 +486,8 @@ static void ttyInput(void* param)
     fcntl(tty, F_SETFL, FNDELAY);
 
     ttyInputRun = ttyInputRunning = 1;
-    
-	printf("Shell>:\n");
+    memset(buf, 0, 512);
+	printf("Shell>:");
 
     while(ttyInputRun)
     {
@@ -463,26 +496,25 @@ static void ttyInput(void* param)
         read(tty, &ch, 1);
         if(ch)
         {
-            if(ch==0x0a)
+            if((ch==0x0d)||(ch==0x0a))
             {
-                printf("You input: %s\n", buf);
-
                 if(!strcmp(buf, "quit"))
                 {
-                    printf("You input quit, to quit!\n");
+					closeThread();
                 }
-                else handle_input(buf, bufConut);
+                else if(bufConut>0) 
+					handle_input(buf, bufConut);
                 
                 memset(buf, 0, 512);
                 bufConut = 0;
 
-                printf("Shell>:\n");
+                printf("Shell>:");
             }
             else if(bufConut==512)
             {
                 memset(buf, 0, 512);
                 bufConut = 0;
-                printf("Shell>:\n");
+                printf("Shell>:");
             }
             else buf[bufConut++] = ch;
 
@@ -490,44 +522,69 @@ static void ttyInput(void* param)
         }
         usleep(100*1000);
     }
-    
     ttyInputRun = ttyInputRunning = 0;
     tcsetattr(tty, TCSANOW, &oldt);
     return;
 }
 
-static int mainThreadRun = 0;
+static void closeThread(void)
+{
+	ttyInputRun = 0;
+	mainThreadRun = 0;
+}
 
 int main(int argc, char **argv)
 {
+	int nread = 0;
+	char buff[512];
+	char comBuffer[512];
+	int comCount = 0;
+	
 	char *dev  = "/dev/ttySAC1"; //串口二
 	sPortFd = OpenDev(dev);
 	if(sPortFd==-1)
 	{
 		printf("open device error!\n");
-		exit (0);
+		return -1;
 	}
 	set_speed(sPortFd, 9600);
 	if (set_Parity(sPortFd,8,1,'N') == -1)
 	{
 		printf("Set Parity Error\n");
-		exit (0);
+		return -1;
 	}
     //read not wait...
     fcntl(sPortFd, F_SETFL, FNDELAY);
     
-    pthread_create(&readWriteThreadId, NULL, readWriteThread, NULL);
     pthread_create(&ttyInputThreadId, NULL, ttyInput, NULL);
 
 	mainThreadRun = 1;
-
+	memset(buff, 0, 512);
 	while(mainThreadRun)
 	{
-		usleep(500*1000);
+	   //read command.
+	   nread = read(sPortFd, buff, COMMANDLEN);
+	   if(nread>0)
+	   {
+	   		memcpy(comBuffer+comCount, buff, nread);
+			comCount+=nread;
+	   		if(comCount==COMMANDLEN)
+			{
+				handle_command(comBuffer, COMMANDLEN);
+				comCount = 0;
+			}
+			else if(comCount>COMMANDLEN) comCount = 0;
+	   }
+	   //write command.
+	   if(haveToCommand)
+	   {
+			write(sPortFd, toCommand, COMMANDLEN);
+			haveToCommand = 0;
+	   }
+	   usleep(200*1000);
 	}
-    closeThread();
 	close(sPortFd);  
-	exit (0);
+	return -1;
 }
 
 
