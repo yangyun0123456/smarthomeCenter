@@ -1,0 +1,3 @@
+1:安装iccavr6.31A.exe
+2：打开注册机Icckg，选择版本imagecrafticcavr proFessional v6.31A
+3:打开已安装好的ICC软件，在HELP选项里选择REGSTER SOFTWARE，在弹出的窗口里选择硬件地址复制到注册机的硬件地址选项，选择生成，再从注册机复制注册码到ICC窗口，点击注册码右边按键激活即可，重新打开后即成为PROFESSIONAL版本。注册成功。

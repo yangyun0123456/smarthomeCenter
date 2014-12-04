@@ -1,0 +1,772 @@
+__start:
+__text_start:
+    002C E5CF      LDI	R28,0x5F
+    002D E0D4      LDI	R29,4
+    002E BFCD      OUT	0x3D,R28
+    002F BFDE      OUT	0x3E,R29
+    0030 51C0      SUBI	R28,0x10
+    0031 40D0      SBCI	R29,0
+    0032 EA0A      LDI	R16,0xAA
+    0033 8308      STD	Y+0,R16
+    0034 2400      CLR	R0
+    0035 E6E1      LDI	R30,0x61
+    0036 E0F0      LDI	R31,0
+    0037 E010      LDI	R17,0
+    0038 37E1      CPI	R30,0x71
+    0039 07F1      CPC	R31,R17
+    003A F011      BEQ	0x003D
+    003B 9201      ST	R0,Z+
+    003C CFFB      RJMP	0x0038
+    003D 8300      STD	Z+0,R16
+    003E E5E6      LDI	R30,0x56
+    003F E0F0      LDI	R31,0
+    0040 E6A0      LDI	R26,0x60
+    0041 E0B0      LDI	R27,0
+    0042 E010      LDI	R17,0
+    0043 35E7      CPI	R30,0x57
+    0044 07F1      CPC	R31,R17
+    0045 F021      BEQ	0x004A
+    0046 95C8      LPM
+    0047 9631      ADIW	R30,1
+    0048 920D      ST	R0,X+
+    0049 CFF9      RJMP	0x0043
+    004A D04D      RCALL	_main
+_exit:
+    004B CFFF      RJMP	_exit
+FILE: D:\smarthome\smarthome\门禁系统资料\code\mcu2code\util.c
+(0001) #include "util.h"
+(0002) 
+(0003) #define XTAL    8
+(0004) void delay_1ms(void)
+(0005) {
+(0006)     int i;
+(0007)     //XTAL*143-2 = 1142
+(0008)     for(i=1;i<1142;i++);
+_delay_1ms:
+  i                    --> R16
+    004C E001      LDI	R16,1
+    004D E010      LDI	R17,0
+    004E 5F0F      SUBI	R16,0xFF
+    004F 4F1F      SBCI	R17,0xFF
+    0050 3706      CPI	R16,0x76
+    0051 E0E4      LDI	R30,4
+    0052 071E      CPC	R17,R30
+    0053 F3D4      BLT	0x004E
+    0054 9508      RET
+_delay_ms:
+  i                    --> R20
+  ms                   --> R22
+    0055 D13E      RCALL	push_gset2
+    0056 01B8      MOVW	R22,R16
+(0009) }
+(0010) //=========================================
+(0011) void delay_ms(int ms)
+(0012) {
+(0013)     int i=0;
+    0057 2744      CLR	R20
+    0058 2755      CLR	R21
+    0059 C003      RJMP	0x005D
+(0014)     while(i<ms)
+(0015)     {
+(0016)         delay_1ms();
+    005A DFF1      RCALL	_delay_1ms
+(0017)         i++;
+    005B 5F4F      SUBI	R20,0xFF
+    005C 4F5F      SBCI	R21,0xFF
+    005D 1746      CP	R20,R22
+    005E 0757      CPC	R21,R23
+    005F F3D4      BLT	0x005A
+    0060 D12B      RCALL	pop_gset2
+    0061 9508      RET
+FILE: D:\smarthome\smarthome\门禁系统资料\code\mcu2code\input.c
+(0001) #include<iom16v.h>
+(0002) #include <macros.h>
+(0003) 
+(0004) #include "output.h"
+(0005) #include "util.h"
+(0006) #include "input.h"
+(0007) 
+(0008) void input_port_init(void)
+(0009) {
+(0010)     //pa input mode.
+(0011)     DDRA = 0x0;
+_input_port_init:
+    0062 2422      CLR	R2
+    0063 BA2A      OUT	0x1A,R2
+(0012)     //上拉。
+(0013)     PORTA = 0xff;
+    0064 EF8F      LDI	R24,0xFF
+    0065 BB8B      OUT	0x1B,R24
+(0014) 	//pc0 input screen status.
+(0015) 	DDRC &= 0xfe;
+    0066 B384      IN	R24,0x14
+    0067 7F8E      ANDI	R24,0xFE
+    0068 BB84      OUT	0x14,R24
+(0016)     //上拉。
+(0017) 	PORTC &= 0xfe;
+    0069 B385      IN	R24,0x15
+    006A 7F8E      ANDI	R24,0xFE
+    006B BB85      OUT	0x15,R24
+(0018) 	
+(0019)     //enable interrupt.
+(0020)     //pd2 input mode.
+(0021)     DDRD &= 0xfb;
+    006C B381      IN	R24,0x11
+    006D 7F8B      ANDI	R24,0xFB
+    006E BB81      OUT	0x11,R24
+(0022) 	//
+(0023) 	PORTD |= 0x04;
+    006F 9A92      SBI	0x12,2
+(0024) 	
+(0025)     SREG |= 0x80;
+    0070 9478      BSET	7
+(0026)     //int0 enable.
+(0027)     GICR |= 0x40;
+    0071 B78B      IN	R24,0x3B
+    0072 6480      ORI	R24,0x40
+    0073 BF8B      OUT	0x3B,R24
+(0028)     //int0 fall edge.
+(0029)     MCUCR |= 0x02;
+    0074 B785      IN	R24,0x35
+    0075 6082      ORI	R24,2
+    0076 BF85      OUT	0x35,R24
+(0030)     return;
+    0077 9508      RET
+(0031) }
+(0032) 
+(0033) char check_screen(void)
+(0034) {
+(0035)     return (PINC&0x01);
+_check_screen:
+    0078 B303      IN	R16,0x13
+    0079 7001      ANDI	R16,1
+    007A 9508      RET
+(0036) }
+(0037) 
+(0038) //diable reader.
+(0039) static void disable_input(void)
+(0040) {
+(0041)     GICR &= 0xbf;
+_disable_input:
+    007B B78B      IN	R24,0x3B
+    007C 7B8F      ANDI	R24,0xBF
+    007D BF8B      OUT	0x3B,R24
+(0042)     return;
+    007E 9508      RET
+(0043) }
+(0044) //enable reader.
+(0045) static void enable_input(void)
+(0046) {
+(0047)     GICR |= 0x40;
+_enable_input:
+    007F B78B      IN	R24,0x3B
+    0080 6480      ORI	R24,0x40
+    0081 BF8B      OUT	0x3B,R24
+(0048)     return;
+    0082 9508      RET
+_int0_isr:
+    0083 D132      RCALL	push_lset
+(0049) }
+(0050) 
+(0051) 
+(0052) //pull id card id and keypad input.
+(0053) #pragma interrupt_handler int0_isr:2
+(0054) void int0_isr(void)
+(0055) {
+(0056) 	disable_input();
+    0084 DFF6      RCALL	_disable_input
+(0057) 	delay_ms(10);
+    0085 E00A      LDI	R16,0xA
+    0086 E010      LDI	R17,0
+    0087 DFCD      RCALL	_delay_ms
+(0058) 	if(!(PINA&0x80)) //id reader ring.
+    0088 99CF      SBIC	0x19,7
+    0089 C003      RJMP	0x008D
+(0059) 	{
+(0060) 		output_ring_on();
+    008A D05C      RCALL	_output_ring_on
+(0061) 		output_screen_on();
+    008B D039      RCALL	_output_screen_on
+(0062) 	}
+    008C C008      RJMP	0x0095
+(0063) 	else if(!(PINA&0x40))
+    008D 99CE      SBIC	0x19,6
+    008E C003      RJMP	0x0092
+(0064) 	{
+(0065) 		output_ring_on();
+    008F D057      RCALL	_output_ring_on
+(0066) 		output_screen_on();
+    0090 D034      RCALL	_output_screen_on
+(0067) 	}
+    0091 C003      RJMP	0x0095
+(0068) 	else if(!(PINA&0x01))
+    0092 99C8      SBIC	0x19,0
+    0093 C001      RJMP	0x0095
+(0069) 	{
+(0070) 		output_screen_on();
+    0094 D030      RCALL	_output_screen_on
+(0071) 	}
+(0072) 	else
+(0073) 	{
+(0074) 		;
+(0075) 	}
+(0076) 	enable_input();
+    0095 DFE9      RCALL	_enable_input
+(0077)     return;
+    0096 D136      RCALL	pop_lset
+    0097 9518      RETI
+FILE: D:\smarthome\smarthome\门禁系统资料\code\mcu2code\main.c
+(0001) #include<iom16v.h>
+(0002) #include <macros.h>
+(0003) 
+(0004) #include "output.h"
+(0005) #include "input.h"
+(0006) #include "timer.h"
+(0007) #include "util.h"
+(0008) 
+(0009) int main(void)
+(0010) {
+(0011) 	output_port_init();
+_main:
+    0098 D00A      RCALL	_output_port_init
+(0012) 	input_port_init();
+    0099 DFC8      RCALL	_input_port_init
+(0013) 	timer_init();
+    009A D054      RCALL	_timer_init
+    009B C003      RJMP	0x009F
+(0014) 	
+(0015)     while(1)
+(0016)     {
+(0017) 		delay_ms(500);
+    009C EF04      LDI	R16,0xF4
+    009D E011      LDI	R17,1
+    009E DFB6      RCALL	_delay_ms
+    009F CFFC      RJMP	0x009C
+(0018)     }
+(0019)     return 0;
+    00A0 2700      CLR	R16
+    00A1 2711      CLR	R17
+    00A2 9508      RET
+FILE: D:\smarthome\smarthome\门禁系统资料\code\mcu2code\output.c
+(0001) #include<iom16v.h>
+(0002) #include <macros.h>
+(0003) 
+(0004) #include "output.h"
+(0005) #include "util.h"
+(0006) #include "input.h"
+(0007) #include "timer.h"
+(0008) 
+(0009) #define KEY_DOWN (PORTB|=0x40)
+(0010) #define KEY_UP (PORTB&=0xbf)
+(0011) #define RING_KEY_ON (PORTB|=0x20)
+(0012) #define RING_KEY_OFF (PORTB&=0xdf)
+(0013) 
+(0014) //pb0-pb7 output.
+(0015) void output_port_init(void)
+(0016) {
+(0017)     //PINB OUTPUT AND pull-up resistors.
+(0018)     DDRB = 0xff;
+_output_port_init:
+    00A3 EF8F      LDI	R24,0xFF
+    00A4 BB87      OUT	0x17,R24
+(0019)     PORTB = 0x0;
+    00A5 2422      CLR	R2
+    00A6 BA28      OUT	0x18,R2
+(0020)     return;
+    00A7 9508      RET
+_output_screen_off:
+  loop                 --> R20
+    00A8 D0ED      RCALL	push_gset1
+(0021) }
+(0022) 
+(0023) void output_screen_off(void)
+(0024) {
+(0025) 	char loop = 0;
+    00A9 2744      CLR	R20
+    00AA C00E      RJMP	0x00B9
+(0026) 
+(0027) 	while(check_screen()&&(loop<5))
+(0028) 	{
+(0029) 		KEY_DOWN;
+    00AB 9AC6      SBI	0x18,6
+(0030) 		delay_ms(50);
+    00AC E302      LDI	R16,0x32
+    00AD E010      LDI	R17,0
+    00AE DFA6      RCALL	_delay_ms
+    00AF 940E01F0  CALL	0x1F0
+(0031) 		KEY_UP;
+(0032) 		delay_ms(50);
+    00B1 DFA3      RCALL	_delay_ms
+(0033) 		loop++;
+    00B2 9543      INC	R20
+(0034) 		if(loop>0)
+    00B3 2422      CLR	R2
+    00B4 1624      CP	R2,R20
+    00B5 F418      BCC	0x00B9
+(0035) 			delay_ms(800);
+    00B6 E200      LDI	R16,0x20
+    00B7 E013      LDI	R17,3
+    00B8 DF9C      RCALL	_delay_ms
+    00B9 DFBE      RCALL	_check_screen
+    00BA 2300      TST	R16
+    00BB F011      BEQ	0x00BE
+    00BC 3045      CPI	R20,5
+    00BD F368      BCS	0x00AB
+(0036) 	}
+(0037) 	return;
+    00BE D0DA      RCALL	pop_gset1
+    00BF 9508      RET
+_screen_on_time_out:
+  timer                --> R20
+    00C0 D0D5      RCALL	push_gset1
+    00C1 2F40      MOV	R20,R16
+(0038) }
+(0039) 
+(0040) #define SCREENONTIMEOUTTIMER        0
+(0041) static void screen_on_time_out(char timer)
+(0042) {
+(0043) 	output_screen_off();
+    00C2 DFE5      RCALL	_output_screen_off
+(0044) 	return;
+    00C3 D0D5      RCALL	pop_gset1
+    00C4 9508      RET
+_output_screen_on:
+  loop                 --> R20
+    00C5 D0D0      RCALL	push_gset1
+    00C6 9722      SBIW	R28,2
+(0045) }
+(0046) 
+(0047) void output_screen_on(void)
+(0048) {
+(0049) 	char loop = 0;
+    00C7 2744      CLR	R20
+    00C8 C00E      RJMP	0x00D7
+(0050) 
+(0051) 	while((!check_screen())&&(loop<5))
+(0052) 	{
+(0053) 		KEY_DOWN;
+    00C9 9AC6      SBI	0x18,6
+(0054) 		delay_ms(50);
+    00CA E302      LDI	R16,0x32
+    00CB E010      LDI	R17,0
+    00CC DF88      RCALL	_delay_ms
+    00CD 940E01F0  CALL	0x1F0
+(0055) 		KEY_UP;
+(0056) 		delay_ms(50);
+    00CF DF85      RCALL	_delay_ms
+(0057) 		loop++;
+    00D0 9543      INC	R20
+(0058) 		if(loop>0)
+    00D1 2422      CLR	R2
+    00D2 1624      CP	R2,R20
+    00D3 F418      BCC	0x00D7
+(0059) 			delay_ms(800);
+    00D4 E200      LDI	R16,0x20
+    00D5 E013      LDI	R17,3
+    00D6 DF7E      RCALL	_delay_ms
+    00D7 DFA0      RCALL	_check_screen
+    00D8 2300      TST	R16
+    00D9 F411      BNE	0x00DC
+    00DA 3045      CPI	R20,5
+    00DB F368      BCS	0x00C9
+(0060) 	}
+(0061) 	
+(0062) 	//400*100ms.
+(0063) 	set_timer(SCREENONTIMEOUTTIMER, 400, screen_on_time_out);
+    00DC E584      LDI	R24,0x54
+    00DD E090      LDI	R25,0
+    00DE 8399      STD	Y+1,R25
+    00DF 8388      STD	Y+0,R24
+    00E0 E920      LDI	R18,0x90
+    00E1 E031      LDI	R19,1
+    00E2 2700      CLR	R16
+    00E3 D01A      RCALL	_set_timer
+(0064) 	return;
+    00E4 9622      ADIW	R28,2
+    00E5 D0B3      RCALL	pop_gset1
+    00E6 9508      RET
+(0065) }
+(0066) 
+(0067) void output_ring_on(void)
+(0068) {
+(0069) 	RING_KEY_ON;
+_output_ring_on:
+    00E7 9AC5      SBI	0x18,5
+(0070) 	delay_ms(50);
+    00E8 E302      LDI	R16,0x32
+    00E9 E010      LDI	R17,0
+    00EA DF6A      RCALL	_delay_ms
+(0071) 	RING_KEY_OFF;
+    00EB B388      IN	R24,0x18
+    00EC 7D8F      ANDI	R24,0xDF
+    00ED BB88      OUT	0x18,R24
+(0072) 	return;
+    00EE 9508      RET
+FILE: D:\smarthome\smarthome\门禁系统资料\code\mcu2code\timer.c
+(0001) #include<iom16v.h>
+(0002) #include <macros.h>
+(0003) 
+(0004) #include "timer.h"
+(0005) 
+(0006) void timer_init(void)
+(0007) {
+(0008)     //enable interrupt.
+(0009)     SREG |= 0x80;
+_timer_init:
+    00EF 9478      BSET	7
+(0010)     //timer0 normal mode.ck/1024.
+(0011)     TCCR0 |= 0x05;
+    00F0 B783      IN	R24,0x33
+    00F1 6085      ORI	R24,5
+    00F2 BF83      OUT	0x33,R24
+(0012)     //init TCNT0.
+(0013)     TCNT0 = 0;
+    00F3 2422      CLR	R2
+    00F4 BE22      OUT	0x32,R2
+(0014)     //TIMSK
+(0015)     //TIMSK |= 0x01;
+(0016)     return; 
+    00F5 9508      RET
+(0017) }
+(0018) //cpu timer0 start
+(0019) static void t0_start(void)
+(0020) {
+(0021)     TIMSK |= 0x01;
+_t0_start:
+    00F6 B789      IN	R24,0x39
+    00F7 6081      ORI	R24,1
+    00F8 BF89      OUT	0x39,R24
+(0022)     return;
+    00F9 9508      RET
+(0023) }
+(0024) //cpu timer0 stop
+(0025) static void t0_stop(void)
+(0026) {
+(0027)     TIMSK &= 0xfe;
+_t0_stop:
+    00FA B789      IN	R24,0x39
+    00FB 7F8E      ANDI	R24,0xFE
+    00FC BF89      OUT	0x39,R24
+(0028)     return;
+    00FD 9508      RET
+_set_timer:
+  cb                   --> Y+4
+  value                --> R22
+  timer                --> R20
+    00FE D095      RCALL	push_gset2
+    00FF 01B9      MOVW	R22,R18
+    0100 2F40      MOV	R20,R16
+(0029) }
+(0030) //
+(0031) static timer_t g_timer[MAXTIMER];
+(0032) //set timer and start timer. set value 0, need wait a cpu timer pice.
+(0033) void set_timer(char timer, int value, timerCB cb)
+(0034) {
+(0035)     //value=0, stoped timer.
+(0036)     g_timer[timer].value = value+1;
+    0101 E084      LDI	R24,4
+    0102 9F84      MUL	R24,R20
+    0103 940E01E4  CALL	<created procedures>
+    0105 01CB      MOVW	R24,R22
+    0106 9601      ADIW	R24,1
+    0107 8391      STD	Z+1,R25
+    0108 8380      STD	Z+0,R24
+(0037)     g_timer[timer].cb = cb;
+    0109 E084      LDI	R24,4
+    010A 9F84      MUL	R24,R20
+    010B 940E01EA  CALL	0x1EA
+    010D 800C      LDD	R0,Y+4
+    010E 801D      LDD	R1,Y+5
+    010F 8211      STD	Z+1,R1
+    0110 8200      STD	Z+0,R0
+(0038)     if(g_timer[timer].value)
+    0111 E084      LDI	R24,4
+    0112 9F84      MUL	R24,R20
+    0113 940E01E4  CALL	<created procedures>
+    0115 8020      LDD	R2,Z+0
+    0116 8031      LDD	R3,Z+1
+    0117 2022      TST	R2
+    0118 F411      BNE	0x011B
+    0119 2033      TST	R3
+    011A F009      BEQ	0x011C
+(0039)         t0_start();
+    011B DFDA      RCALL	_t0_start
+(0040)     return;
+    011C D06F      RCALL	pop_gset2
+    011D 9508      RET
+(0041) }
+(0042) //stop timer and clean timer.
+(0043) void stop_timer(char timer)
+(0044) {
+(0045)     if(g_timer[timer].value)
+_stop_timer:
+  timer                --> R16
+    011E E084      LDI	R24,4
+    011F 9F80      MUL	R24,R16
+    0120 940E01E4  CALL	<created procedures>
+    0122 8020      LDD	R2,Z+0
+    0123 8031      LDD	R3,Z+1
+    0124 2022      TST	R2
+    0125 F411      BNE	0x0128
+    0126 2033      TST	R3
+    0127 F059      BEQ	0x0133
+(0046)     {
+(0047)         //stop this timer.
+(0048)         g_timer[timer].value = 0;
+    0128 E084      LDI	R24,4
+    0129 9F80      MUL	R24,R16
+    012A 940E01E4  CALL	<created procedures>
+    012C 940E01F6  CALL	0x1F6
+(0049)         g_timer[timer].cb = 0;
+    012E 9F80      MUL	R24,R16
+    012F 940E01EA  CALL	0x1EA
+    0131 8231      STD	Z+1,R3
+    0132 8220      STD	Z+0,R2
+(0050)     }
+(0051)     return;
+    0133 9508      RET
+_timer0_isr:
+  running_timer_count  --> R20
+  i                    --> R22
+    0134 D081      RCALL	push_lset
+    0135 D05E      RCALL	push_gset2
+(0052) }
+(0053) //timer spank.
+(0054) #pragma interrupt_handler timer0_isr:10
+(0055) void timer0_isr(void)
+(0056) {
+(0057)     static char time_pices = 0;
+(0058)     ++time_pices;
+    0136 91800060  LDS	R24,time_pices
+    0138 5F8F      SUBI	R24,0xFF
+    0139 93800060  STS	time_pices,R24
+(0059)     //200ms.
+(0060)     if(time_pices == 2)
+    013B 3082      CPI	R24,2
+    013C F009      BEQ	0x013E
+    013D C04B      RJMP	0x0189
+(0061)     {
+(0062)         char running_timer_count = 0;
+    013E 2744      CLR	R20
+(0063)         char i;
+(0064)         for(i=0;i<MAXTIMER;i++)
+    013F 2766      CLR	R22
+    0140 C03F      RJMP	0x0180
+(0065)         {
+(0066)             if(g_timer[i].value>1)
+    0141 E084      LDI	R24,4
+    0142 9F86      MUL	R24,R22
+    0143 940E01E4  CALL	<created procedures>
+    0145 8020      LDD	R2,Z+0
+    0146 8031      LDD	R3,Z+1
+    0147 E081      LDI	R24,1
+    0148 E090      LDI	R25,0
+    0149 1582      CP	R24,R2
+    014A 0593      CPC	R25,R3
+    014B F478      BCC	0x015B
+(0067)             {
+(0068)                 --g_timer[i].value;
+    014C E084      LDI	R24,4
+    014D 9F86      MUL	R24,R22
+    014E 0110      MOVW	R2,R0
+    014F E681      LDI	R24,0x61
+    0150 E090      LDI	R25,0
+    0151 0E28      ADD	R2,R24
+    0152 1E39      ADC	R3,R25
+    0153 01F1      MOVW	R30,R2
+    0154 8180      LDD	R24,Z+0
+    0155 8191      LDD	R25,Z+1
+    0156 9701      SBIW	R24,1
+    0157 8391      STD	Z+1,R25
+    0158 8380      STD	Z+0,R24
+(0069)                 ++running_timer_count;
+    0159 9543      INC	R20
+(0070)             }
+    015A C024      RJMP	0x017F
+(0071)             //timer call back.
+(0072)             else if(g_timer[i].value==1)
+    015B E084      LDI	R24,4
+    015C 9F86      MUL	R24,R22
+    015D 940E01E4  CALL	<created procedures>
+    015F 8180      LDD	R24,Z+0
+    0160 8191      LDD	R25,Z+1
+    0161 3081      CPI	R24,1
+    0162 E0E0      LDI	R30,0
+    0163 079E      CPC	R25,R30
+    0164 F4D1      BNE	0x017F
+(0073)             {
+(0074)                 g_timer[i].value = 0;
+    0165 E084      LDI	R24,4
+    0166 9F86      MUL	R24,R22
+    0167 940E01E4  CALL	<created procedures>
+    0169 940E01F6  CALL	0x1F6
+(0075)                 if(g_timer[i].cb)
+    016B 9F86      MUL	R24,R22
+    016C 940E01EA  CALL	0x1EA
+    016E 8020      LDD	R2,Z+0
+    016F 8031      LDD	R3,Z+1
+    0170 2022      TST	R2
+    0171 F411      BNE	0x0174
+    0172 2033      TST	R3
+    0173 F059      BEQ	0x017F
+(0076)                 {
+(0077)                     //disable cpu timer.
+(0078)                     t0_stop();
+    0174 DF85      RCALL	_t0_stop
+(0079)                     (g_timer[i].cb)(i);
+    0175 2F06      MOV	R16,R22
+    0176 E084      LDI	R24,4
+    0177 9F86      MUL	R24,R22
+    0178 940E01EA  CALL	0x1EA
+    017A 81A0      LDD	R26,Z+0
+    017B 81B1      LDD	R27,Z+1
+    017C 01FD      MOVW	R30,R26
+    017D D02F      RCALL	xicall
+(0080)                     //enable cpu timer.
+(0081)                     t0_start();
+    017E DF77      RCALL	_t0_start
+    017F 9563      INC	R22
+    0180 3064      CPI	R22,4
+    0181 F408      BCC	0x0183
+    0182 CFBE      RJMP	0x0141
+(0082)                 }
+(0083)             }
+(0084)         }
+(0085)         time_pices = 0;
+    0183 2422      CLR	R2
+    0184 92200060  STS	time_pices,R2
+(0086)         //if no timer running, stop cpu timer.
+(0087)         if(!running_timer_count) t0_stop();
+    0186 2344      TST	R20
+    0187 F409      BNE	0x0189
+    0188 DF71      RCALL	_t0_stop
+(0088)     }
+(0089)     return;
+FILE: <library>
+    0189 D002      RCALL	pop_gset2
+    018A D042      RCALL	pop_lset
+    018B 9518      RETI
+pop_gset2:
+    018C E0E2      LDI	R30,2
+    018D C00C      RJMP	pop
+push_gset5:
+    018E 92FA      ST	R15,-Y
+    018F 92EA      ST	R14,-Y
+push_gset4:
+    0190 92DA      ST	R13,-Y
+    0191 92CA      ST	R12,-Y
+push_gset3:
+    0192 92BA      ST	R11,-Y
+    0193 92AA      ST	R10,-Y
+push_gset2:
+    0194 937A      ST	R23,-Y
+    0195 936A      ST	R22,-Y
+push_gset1:
+    0196 935A      ST	R21,-Y
+    0197 934A      ST	R20,-Y
+    0198 9508      RET
+pop_gset1:
+    0199 E0E1      LDI	R30,1
+pop:
+    019A 9149      LD	R20,Y+
+    019B 9159      LD	R21,Y+
+    019C FDE0      SBRC	R30,0
+    019D 9508      RET
+    019E 9169      LD	R22,Y+
+    019F 9179      LD	R23,Y+
+    01A0 FDE1      SBRC	R30,1
+    01A1 9508      RET
+    01A2 90A9      LD	R10,Y+
+    01A3 90B9      LD	R11,Y+
+    01A4 FDE2      SBRC	R30,2
+    01A5 9508      RET
+    01A6 90C9      LD	R12,Y+
+    01A7 90D9      LD	R13,Y+
+    01A8 FDE3      SBRC	R30,3
+    01A9 9508      RET
+    01AA 90E9      LD	R14,Y+
+    01AB 90F9      LD	R15,Y+
+    01AC 9508      RET
+xicall:
+    01AD 920A      ST	R0,-Y
+    01AE 95C8      LPM
+    01AF 920A      ST	R0,-Y
+    01B0 9631      ADIW	R30,1
+    01B1 95C8      LPM
+    01B2 2DF0      MOV	R31,R0
+    01B3 91E9      LD	R30,Y+
+    01B4 9009      LD	R0,Y+
+    01B5 9409      IJMP
+push_lset:
+    01B6 93FA      ST	R31,-Y
+    01B7 93EA      ST	R30,-Y
+    01B8 93BA      ST	R27,-Y
+    01B9 93AA      ST	R26,-Y
+    01BA 939A      ST	R25,-Y
+    01BB 938A      ST	R24,-Y
+    01BC 933A      ST	R19,-Y
+    01BD 932A      ST	R18,-Y
+    01BE 931A      ST	R17,-Y
+    01BF 930A      ST	R16,-Y
+    01C0 929A      ST	R9,-Y
+    01C1 928A      ST	R8,-Y
+    01C2 927A      ST	R7,-Y
+    01C3 926A      ST	R6,-Y
+    01C4 925A      ST	R5,-Y
+    01C5 924A      ST	R4,-Y
+    01C6 923A      ST	R3,-Y
+    01C7 922A      ST	R2,-Y
+    01C8 921A      ST	R1,-Y
+    01C9 920A      ST	R0,-Y
+    01CA B60F      IN	R0,0x3F
+    01CB 920A      ST	R0,-Y
+    01CC 9508      RET
+pop_lset:
+    01CD 9009      LD	R0,Y+
+    01CE BE0F      OUT	0x3F,R0
+    01CF 9009      LD	R0,Y+
+    01D0 9019      LD	R1,Y+
+    01D1 9029      LD	R2,Y+
+    01D2 9039      LD	R3,Y+
+    01D3 9049      LD	R4,Y+
+    01D4 9059      LD	R5,Y+
+    01D5 9069      LD	R6,Y+
+    01D6 9079      LD	R7,Y+
+    01D7 9089      LD	R8,Y+
+    01D8 9099      LD	R9,Y+
+    01D9 9109      LD	R16,Y+
+    01DA 9119      LD	R17,Y+
+    01DB 9129      LD	R18,Y+
+    01DC 9139      LD	R19,Y+
+    01DD 9189      LD	R24,Y+
+    01DE 9199      LD	R25,Y+
+    01DF 91A9      LD	R26,Y+
+    01E0 91B9      LD	R27,Y+
+    01E1 91E9      LD	R30,Y+
+    01E2 91F9      LD	R31,Y+
+    01E3 9508      RET
+<created procedures>:
+    01E4 01F0      MOVW	R30,R0
+    01E5 E681      LDI	R24,0x61
+    01E6 E090      LDI	R25,0
+    01E7 0FE8      ADD	R30,R24
+    01E8 1FF9      ADC	R31,R25
+    01E9 9508      RET
+    01EA 01F0      MOVW	R30,R0
+    01EB E683      LDI	R24,0x63
+    01EC E090      LDI	R25,0
+    01ED 0FE8      ADD	R30,R24
+    01EE 1FF9      ADC	R31,R25
+    01EF 9508      RET
+    01F0 B388      IN	R24,0x18
+    01F1 7B8F      ANDI	R24,0xBF
+    01F2 BB88      OUT	0x18,R24
+    01F3 E302      LDI	R16,0x32
+    01F4 E010      LDI	R17,0
+    01F5 9508      RET
+    01F6 2422      CLR	R2
+    01F7 2433      CLR	R3
+    01F8 8231      STD	Z+1,R3
+    01F9 8220      STD	Z+0,R2
+    01FA E084      LDI	R24,4
+    01FB 9508      RET

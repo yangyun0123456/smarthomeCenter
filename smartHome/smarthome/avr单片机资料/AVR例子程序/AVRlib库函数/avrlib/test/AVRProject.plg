@@ -1,0 +1,63 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: AVRProject - Win32 Debug--------------------
+</h3>
+
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/a2d.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/a2d.c -o c:\code\avr\avrlib/a2d.o
+In file included from c:/code/avr/avrlib/a2d.c:23:
+c:/code/avr/avrlib/a2d.h:96:1: warning: "ADCSR" redefined
+In file included from c:/programa/winavr/avr/include/avr/io.h:183,
+                 from c:/code/avr/avrlib/a2d.c:18:
+c:/programa/winavr/avr/include/avr/iom8.h:60:1: warning: this is the location of the previous definition
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/bitbuf.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/bitbuf.c -o c:\code\avr\avrlib/bitbuf.o
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/buffer.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/buffer.c -o c:\code\avr\avrlib/buffer.o
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/cmdline.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/cmdline.c -o c:\code\avr\avrlib/cmdline.o
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/debug.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/debug.c -o c:\code\avr\avrlib/debug.o
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/encoder.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/encoder.c -o c:\code\avr\avrlib/encoder.o
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/fat.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/fat.c -o c:\code\avr\avrlib/fat.o
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/fixedpt.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/fixedpt.c -o c:\code\avr\avrlib/fixedpt.o
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/glcd.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/glcd.c -o c:\code\avr\avrlib/glcd.o
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/gps.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/gps.c -o c:\code\avr\avrlib/gps.o
+c:/code/avr/avrlib/gps.c: In function `gpsInfoPrint':
+c:/code/avr/avrlib/gps.c:52: warning: implicit declaration of function `rprintfFloat'
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/i2c.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/i2c.c -o c:\code\avr\avrlib/i2c.o
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/i2ceeprom.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/i2ceeprom.c -o c:\code\avr\avrlib/i2ceeprom.o
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/i2csw.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/i2csw.c -o c:\code\avr\avrlib/i2csw.o
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/ks0108.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/ks0108.c -o c:\code\avr\avrlib/ks0108.o
+avr-gcc -c -g -Os -Wall -Wstrict-prototypes -Ic:\code\avr\avrlib -Ic:\code\avr\avrlib/conf -Wa,-ahlms=c:\code\avr\avrlib/lcd.lst -mmcu=atmega8 -I. c:\code\avr\avrlib/lcd.c -o c:\code\avr\avrlib/lcd.o
+c:/code/avr/avrlib/lcd.c: In function `lcdInitHW':
+c:/code/avr/avrlib/lcd.c:72: error: `DDRA' undeclared (first use in this function)
+c:/code/avr/avrlib/lcd.c:72: error: (Each undeclared identifier is reported only once
+c:/code/avr/avrlib/lcd.c:72: error: for each function it appears in.)
+c:/code/avr/avrlib/lcd.c:73: error: `PORTA' undeclared (first use in this function)
+c:/code/avr/avrlib/lcd.c: In function `lcdBusyWait':
+c:/code/avr/avrlib/lcd.c:88: error: `DDRA' undeclared (first use in this function)
+c:/code/avr/avrlib/lcd.c:89: error: `PORTA' undeclared (first use in this function)
+c:/code/avr/avrlib/lcd.c:94: error: `PINA' undeclared (first use in this function)
+c:/code/avr/avrlib/lcd.c: In function `lcdControlWrite':
+c:/code/avr/avrlib/lcd.c:147: error: `DDRA' undeclared (first use in this function)
+c:/code/avr/avrlib/lcd.c:148: error: `PORTA' undeclared (first use in this function)
+c:/code/avr/avrlib/lcd.c: In function `lcdControlRead':
+c:/code/avr/avrlib/lcd.c:180: error: `DDRA' undeclared (first use in this function)
+c:/code/avr/avrlib/lcd.c:181: error: `PORTA' undeclared (first use in this function)
+c:/code/avr/avrlib/lcd.c:204: error: `PINA' undeclared (first use in this function)
+c:/code/avr/avrlib/lcd.c: In function `lcdDataWrite':
+c:/code/avr/avrlib/lcd.c:242: error: `DDRA' undeclared (first use in this function)
+c:/code/avr/avrlib/lcd.c:243: error: `PORTA' undeclared (first use in this function)
+c:/code/avr/avrlib/lcd.c: In function `lcdDataRead':
+c:/code/avr/avrlib/lcd.c:275: error: `DDRA' undeclared (first use in this function)
+c:/code/avr/avrlib/lcd.c:276: error: `PORTA' undeclared (first use in this function)
+c:/code/avr/avrlib/lcd.c:299: error: `PINA' undeclared (first use in this function)
+make: *** [c:\code\avr\avrlib/lcd.o] Error 1
+Error executing make.
+
+
+
+<h3>Results</h3>
+AVRProject.exe - 18 error(s), 3 warning(s)
+</pre>
+</body>
+</html>
